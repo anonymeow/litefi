@@ -73,7 +73,7 @@ void text_to_binary(const char* input) {
 		for (int z = 0; z < 8; z++) { // Our array is reversed, put the number in the right order.
 			binary[z] = binary_reverse[7 - z];
 		}
-		for (int i = 0; i < 9; i++) { // This will store each 8 bits in an array within the binary list.
+		for (int i = 0; i < 8; i++) { // This will store each 8 bits in an array within the binary list.
 			// This will store the 8 bits in row x and column i.
 			// x is the same value as that characters position in the input char array.
 			// So, if a is the second letter in the input, x = 2, and i = 0, 1, 2, 3, 4, 5, 6, 7
@@ -98,8 +98,8 @@ void setup() {
 	Serial.begin(9600); // Starts serial monitor
 	while (!Serial);
 	Serial.println("----------------------------------");
-	Serial.println("   Welcome to Li-Fi v. 1.0");
-	Serial.println("Li-Fi:  Type !help for commands.");
+	Serial.println("   Welcome to Lite-Fi v. 1.0");
+	Serial.println("Lite-Fi:  Type !help for commands.");
 	Serial.println("----------------------------------");
 }
 
@@ -145,12 +145,12 @@ void loop() {
 
 			if (command == "clear") {
 				Serial.println("--------------------------");
-				Serial.println("Li-Fi: Cleared");
+				Serial.println("Lite-Fi: Cleared");
 				Serial.println("--------------------------");
 			}
 			if (command == "help") {
 				Serial.println("--------------------------");
-				Serial.println("Li-Fi: ![command]");
+				Serial.println("Lite-Fi: ![command]");
 				Serial.println("  !off - turns off laser.");
 				Serial.println("  !on - turns laser on.");
 				Serial.println("  !clear - clears last command.");
@@ -166,6 +166,7 @@ void loop() {
 			char char_array[25]; // creates an array to store characters of string.
 			letter.toCharArray(char_array, 25); // converts string to character array.
 			text_to_binary(char_array);
+
 
 			for (unsigned int i = 0; i < strlen(char_array); i++) {
 				if (binary_list[i][0] == '0'){
@@ -229,12 +230,20 @@ void loop() {
 					laser.on();
 
 				}
-				delay(1000);
+				if (binary_list[i][6] == '0') {
+					laser.lednum = 2;
+					laser.off();
+				}
+				else if (binary_list[i][6]) {
+					laser.lednum = 2;
+					laser.on();
+				}
+
+				delay(50);
 				laser.alloff();
-				delay(1000);
-			}
+				delay(50);
+				}
+
 		}
 	}
 }
-
-
