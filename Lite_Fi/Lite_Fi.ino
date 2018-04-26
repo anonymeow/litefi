@@ -43,8 +43,11 @@ class Laser { // Creates the class laser. This contains all the functions of a l
 	}
 
 	// This simply interates through the lights and turns them all off.
-	void alloff() {
+	void alloff(int led = 10) { // This is set to 10 to null it out.
 		for (lednum = 9; lednum > 0; lednum--) {
+			if (lednum == led){
+				continue;
+			}
 			digitalWrite(lednum, LOW);
 		}
 	}
@@ -257,8 +260,8 @@ void loop() {
 				}
 
 				delay(500);
-				laser.alloff(); // This will reset the lasers back to 1.
-				delay(100);
+				laser.alloff(5); // This will reset the lasers back to 1.
+				delay(500);
 
 				if (binary_list[i][4] == '0'){
 					laser.lednum = 9;
@@ -298,7 +301,7 @@ void loop() {
 				// These delays will eventually be adjusted for the future.
 				// It all depends on the photodiodes speed.
 				delay(500);
-				laser.alloff();
+				laser.alloff(5);
 				delay(500);
 
 			}
