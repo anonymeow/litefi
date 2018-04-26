@@ -1,7 +1,7 @@
 
 /*				 Project Lite-Fi
  *  	   By Nima Behmanesh, Joe Janson
- * 				  Version 1.0.1
+ * 				  Version 1.0.4
  *			   Senior Poject 2018
  *			 Casa Roble Highschool
  *
@@ -43,12 +43,14 @@ class Laser { // Creates the class laser. This contains all the functions of a l
 	}
 
 	// This simply interates through the lights and turns them all off.
-	void alloff(int led = 10) { // This is set to 10 to null it out.
+	void alloff(int led = 10) {
 		for (lednum = 9; lednum > 0; lednum--) {
 			if (lednum == led){
 				continue;
 			}
-			digitalWrite(lednum, LOW);
+			else {
+				digitalWrite(lednum, LOW);
+			}
 		}
 	}
 
@@ -386,4 +388,3 @@ void loop() {
 		}
 	}
 }
-
